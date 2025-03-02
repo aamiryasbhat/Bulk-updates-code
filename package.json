@@ -1,0 +1,32 @@
+{
+  "name": "bulk-action-platform",
+  "version": "1.0.0",
+  "description": "Bulk Update Platform",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "generate-contacts": "node scripts/generateContacts.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^4.16.5",
+    "bullmq": "^5.41.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0",
+    "pg": "^8.13.3",
+    "sequelize": "^6.37.5",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "ioredis": "^5.5.0",
+    "@faker-js/faker": "^9.5.1",
+    "express-list-routes": "^1.2.4",
+    "faker": "^6.6.6",
+    "nodemon": "^3.1.9"
+  }
+}

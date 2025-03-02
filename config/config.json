@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "admin",
+    "database": "bulk_action_db",
+    "host": "localhost",
+    "port": 5434,
+    "dialect": "postgres"
+  }
+}
