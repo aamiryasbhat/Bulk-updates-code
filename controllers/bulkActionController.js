@@ -8,7 +8,7 @@ exports.createBulkAction = async (req, res) => {
   const { accountId, entityType, updates, scheduledAt } = req.body;
 
   try {
-    // Validate required fields
+    
     if (!accountId) {
       return res.status(400).json({ error: "accountId is required" });
     }
@@ -21,7 +21,7 @@ exports.createBulkAction = async (req, res) => {
       return res.status(400).json({ error: "Updates must be a non-empty array" });
     }
 
-    // Validate scheduledAt
+    
     let scheduledTimeIST = null;
     let scheduledTimeUTC = null;
     
@@ -37,16 +37,13 @@ exports.createBulkAction = async (req, res) => {
         return res.status(400).json({ error: "scheduledAt must be in the future" });
       }
 
-      // Convert IST to UTC for storage and queue
+      
       scheduledTimeUTC = getUTCTime(scheduledTimeIST);
 
-      // Log times for debugging
-      //console.log('Current time (IST):', nowIST.toISOString());
-      //console.log('Scheduled time (IST):', scheduledTimeIST.toISOString());
-      //console.log('Scheduled time (UTC):', scheduledTimeUTC.toISOString());
+      
     }
 
-    // Transform updates
+    
     const transformedUpdates = updates.map(update => {
       if (!update.contactId || typeof update.contactId !== 'string') {
         throw new Error("Each update must have a valid contactId");
@@ -75,7 +72,7 @@ exports.createBulkAction = async (req, res) => {
       updates: scheduledTimeUTC ? transformedUpdates : undefined
     });
 
-    // Add to queue with delay if scheduled
+  
     const queueOptions = {
       removeOnComplete: false
     };
@@ -84,8 +81,7 @@ exports.createBulkAction = async (req, res) => {
       const now = Date.now();
       const delay = scheduledTimeUTC.getTime() - now;
       
-      // Log delay calculation in minutes
-     // console.log('Delay in minutes:', Math.round(delay / (1000 * 60)));
+     
       
       if (delay > 0) {
         queueOptions.delay = delay;
